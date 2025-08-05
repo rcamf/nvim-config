@@ -56,18 +56,20 @@ local function scripts_picker(opts)
 	local results = {}
 	for _, package_json in ipairs(locations) do
 		local file = io.open(package_json, "rb")
-		local jsonString = file:read("*a")
-		local jsonDecode = vim.fn.json_decode(jsonString)
-		local scripts = jsonDecode["scripts"]
-		for name, code in pairs(scripts) do
-			table.insert(results, {
-				path = vim.fs.dirname(package_json),
-				name = jsonDecode["name"],
-				code = code,
-				script = name,
-			})
+		if file ~= nil then
+			local jsonString = file:read("*a")
+			local jsonDecode = vim.fn.json_decode(jsonString)
+			local scripts = jsonDecode["scripts"]
+			for name, code in pairs(scripts) do
+				table.insert(results, {
+					path = vim.fs.dirname(package_json),
+					name = jsonDecode["name"],
+					code = code,
+					script = name,
+				})
+			end
+			file:close()
 		end
-		file:close()
 	end
 
 	pickers
@@ -84,7 +86,7 @@ local function scripts_picker(opts)
 				end,
 			}),
 			sorter = conf.generic_sorter(opts),
-			attach_mappings = function(_, map)
+			attach_mappings = function(_, _)
 				actions.select_default:replace(function(prompt_bufnr)
 					actions.close(prompt_bufnr)
 					local entry = action_state.get_selected_entry()
@@ -97,7 +99,7 @@ local function scripts_picker(opts)
 end
 
 return require("telescope").register_extension({
-	setup = function(opts) end,
+	setup = function() end,
 	exports = {
 		scripts = function(opts)
 			return scripts_picker(opts)
