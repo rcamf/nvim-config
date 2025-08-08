@@ -22,10 +22,19 @@ return {
 						override_file_sorter = true, -- override the file sorter
 						case_mode = "smart_case",
 					},
+					package_json = {
+						use_git_root = false,
+						entries = {
+							columns = {
+								"name",
+								"script"
+							}
+						}
+					}
 				},
 			})
 			require("telescope").load_extension("fzf")
-			require('telescope').load_extension("packagescript")
+			require('telescope').load_extension("package_json")
 
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, {
@@ -40,7 +49,7 @@ return {
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, {
 				desc = "Find Help Tags",
 			})
-			vim.keymap.set("n", "<leader>fps", require('telescope').extensions.packagescript.scripts, {
+			vim.keymap.set("n", "<leader>fps", require('telescope').extensions.package_json.scripts, {
 				desc = "Find package json scripts in cwd or current buffer directory"
 			})
 		end,

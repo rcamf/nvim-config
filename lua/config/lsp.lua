@@ -1,11 +1,9 @@
-vim.lsp.config["ts_ls"] = {
-	settings = {
-		preferences = {
-			importModuleSpecifier = "relative",
-		},
-	},
-}
+local ts_ls = require("lsp.ts_ls")
+
+vim.lsp.config["ts_ls"] = ts_ls
+
 vim.lsp.enable("ts_ls")
+
 vim.lsp.config["lua_ls"] = {
 	settings = {
 		Lua = {
