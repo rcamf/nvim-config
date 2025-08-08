@@ -1,5 +1,6 @@
 return {
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	{ "rcamf/telescope-package-json.nvim" },
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
