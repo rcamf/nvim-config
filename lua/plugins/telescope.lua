@@ -24,7 +24,6 @@ return {
 						case_mode = "smart_case",
 					},
 					package_json = {
-						use_git_root = false,
 						entries = {
 							columns = {
 								"name",
