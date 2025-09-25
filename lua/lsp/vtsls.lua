@@ -1,6 +1,4 @@
-local lspconfig = require("lspconfig")
-
-lspconfig.vtsls.setup({
+vim.lsp.config("vtsls", {
 	settings = {
 		typescript = {
 			preferences = {
@@ -18,3 +16,5 @@ lspconfig.vtsls.setup({
 		},
 	},
 })
+
+vim.lsp.enable("vtsls")
